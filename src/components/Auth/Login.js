@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import API from "../../api"; // Ensure you import your axios instance
+import API from "../../api";
+import "../../styles/auth.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -39,34 +40,40 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
+    <div className="auth-container">
+      <h1 className="auth-header">Login</h1>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="uername-sec">
+          <label className="username-label">Username</label>
           <input
             type="text"
+            className="username-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          {usernameError && <p className="text-red-500">{usernameError}</p>}
+          {usernameError && <p className="username-error">{usernameError}</p>}
           {/* Display username error */}
         </div>
-        <div>
-          <label>Password</label>
+        <div className="password-sec">
+          <label className="password-label">Password</label>
           <input
             type="password"
+            className="password-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          {passwordError && <p className="text-red-500">{passwordError}</p>}
+          {passwordError && <p className="password-error">{passwordError}</p>}
           {/* Display password error */}
         </div>
-        <button type="submit">Login</button>
+        <button className="auth-button" type="submit">
+          Login
+        </button>
       </form>
-      <p onClick={() => navigate("/signup")}>Signup</p>
+      <p className="switch-link" onClick={() => navigate("/signup")}>
+        Click here to Signup
+      </p>
     </div>
   );
 };

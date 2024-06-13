@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import API from "../../api";
+import "../../styles/auth.css";
 
 const Signup = () => {
   const [username, setUsername] = useState("");
@@ -32,32 +33,38 @@ const Signup = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Signup</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username</label>
+    <div className="auth-container">
+      <h1 className="auth-header">Signup</h1>
+      <form onSubmit={handleSubmit} className="auth-form">
+        <div className="uername-sec">
+          <label className="username-label">Username</label>
           <input
             type="text"
+            className="username-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          {error && <p className="text-red-500">{error}</p>}{" "}
+          {error && <p className="username-error">{error}</p>}{" "}
           {/* Display error message */}
         </div>
-        <div>
-          <label>Password</label>
+        <div className="password-sec">
+          <label className="password-label">Password</label>
           <input
             type="password"
+            className="password-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Signup</button>
+        <button type="submit" className="auth-button">
+          Signup
+        </button>
       </form>
-      <p onClick={() => navigate("/login")}>login</p>
+      <p className="switch-link" onClick={() => navigate("/login")}>
+        Click here to Login
+      </p>
     </div>
   );
 };

@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import API from "../api";
 import "../styles.css";
+import "../styles/Homepage.css";
 
 const HomePage = () => {
   const [pdfs, setPdfs] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null); // State to store the selected file
   const { token, logout } = useAuth();
-  // const navigate = useNavigate();
+  const fileInputRef = useRef(); // Reference to the file input
 
   useEffect(() => {
     API.get("/pdfs", {
@@ -27,10 +29,16 @@ const HomePage = () => {
       });
   }, [token, logout]);
 
-  const handleUpload = (e) => {
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]); // Update state with the selected file
+  };
+
+  const handleUpload = () => {
+    if (!selectedFile) return; // Return if no file is selected
+
     const formData = new FormData();
-    formData.append("pdf", e.target.files[0]);
-    formData.append("title", e.target.files[0].name);
+    formData.append("pdf", selectedFile);
+    formData.append("title", selectedFile.name);
 
     API.post("/pdfs/upload", formData, {
       headers: {
@@ -40,6 +48,8 @@ const HomePage = () => {
     })
       .then((response) => {
         setPdfs([...pdfs, response.data]);
+        setSelectedFile(null); // Clear the selected file after upload
+        fileInputRef.current.value = ""; // Clear the file input field
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -51,20 +61,36 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container">
-      <h1 className="text-2xl">Upload PDF</h1>
-      <input type="file" onChange={handleUpload} />
-      <button onClick={logout} className="logout-button">
-        Logout
-      </button>
-      <h2 className="text-xl">Uploaded PDFs</h2>
-      <ul>
+    <div className="homepage-container">
+      <div className="sticky-sec">
+        <div className="homepage-head">
+          <h1 className="homepage-header">Upload PDF</h1>
+          <button onClick={logout} className="logout-button">
+            Logout
+          </button>
+        </div>
+        <div className="upload-sec">
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="file-input"
+            ref={fileInputRef} // Attach the ref to the file input
+          />
+          <button onClick={handleUpload} className="upload-button">
+            Upload
+          </button>
+        </div>
+        <div className="pdf-sec-header">
+          <h2 className="pdf-header">Uploaded PDFs</h2>
+        </div>
+      </div>
+      <div className="pdf-list">
         {pdfs.map((pdf) => (
-          <li key={pdf._id}>
+          <div key={pdf._id} className="pdf">
             <Link to={`/pdf/${pdf._id}`}>{pdf.title}</Link>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

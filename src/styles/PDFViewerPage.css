@@ -1,0 +1,75 @@
+/* PDFViewerPage.css */
+
+.pdf-viewer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 1200px;
+}
+
+.document {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto; /* Enable both horizontal and vertical scrolling */
+  width: 100%;
+}
+
+.document-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-sec {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.zoom-sec {
+  display: flex;
+  align-items: center;
+}
+
+.zoom-,
+.zoom +,
+.pre-button,
+.next-button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6200ea; /* Button color */
+  color: #fff;
+  cursor: pointer;
+}
+
+.zoom-:hover,
+.zoom + :hover,
+.pre-button:hover,
+.next-button:hover {
+  background-color: #3700b3; /* Darker shade on hover */
+}
+
+.page-number {
+  margin: 0 10px;
+}
+
+.page-button-sec {
+  display: flex;
+  align-items: center;
+}
+
+button:disabled {
+  background-color: #333;
+  cursor: not-allowed;
+}
