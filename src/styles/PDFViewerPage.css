@@ -40,8 +40,8 @@
   align-items: center;
 }
 
-.zoom-,
-.zoom +,
+.zoom-i,
+.zoom-o,
 .pre-button,
 .next-button {
   padding: 10px;
@@ -51,6 +51,13 @@
   background-color: #6200ea; /* Button color */
   color: #fff;
   cursor: pointer;
+  font-size: 16px;
+}
+
+.zoom-i,
+.zoom-o {
+  width: 40px;
+  text-align: center;
 }
 
 .zoom-:hover,

@@ -75,11 +75,11 @@ const PDFViewerPage = () => {
       </div>
       <div className="button-sec">
         <div className="zoom-sec">
-          <button onClick={zoomOut} className="zoom-">
-            -
+          <button onClick={zoomOut} className="zoom-o">
+            <b>-</b>
           </button>
-          <button onClick={zoomIn} className="zoom+">
-            +
+          <button onClick={zoomIn} className="zoom-i">
+            <b>+</b>
           </button>
         </div>
         <p className="page-number">
@@ -91,7 +91,7 @@ const PDFViewerPage = () => {
             onClick={goToPreviousPage}
             className="pre-button"
           >
-            Previous
+            Prev
           </button>
           <button
             disabled={pageNumber >= numPages}
