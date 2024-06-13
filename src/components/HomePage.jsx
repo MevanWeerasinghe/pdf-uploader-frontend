@@ -63,7 +63,7 @@ const HomePage = () => {
       setSearchResults([...pdfs, response.data]);
       setSelectedFile(null);
       fileInputRef.current.value = "";
-      setUploadError(""); // Clear upload error after successful upload
+      setUploadError("");
     } catch (error) {
       if (error.response && error.response.status === 401) {
         logout();
@@ -87,7 +87,7 @@ const HomePage = () => {
       });
       setSearchResults(response.data);
       setIsSearching(true);
-      setSearchError(""); // Clear search error after successful search
+      setSearchError("");
     } catch (error) {
       if (error.response && error.response.status === 401) {
         logout();
@@ -120,7 +120,7 @@ const HomePage = () => {
     setSearchResults(pdfs);
     setIsSearching(false);
     setSearchQuery("");
-    setSearchError(""); // Clear search error on reset
+    setSearchError("");
   };
 
   return (

@@ -19,7 +19,6 @@ const Login = () => {
 
     try {
       const response = await API.post("/auth/login", {
-        // Use the imported API instance
         username,
         password,
       });

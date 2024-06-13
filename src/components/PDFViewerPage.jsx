@@ -14,7 +14,7 @@ const PDFViewerPage = () => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [pdfUrl, setPdfUrl] = useState("");
-  const [scale, setScale] = useState(1.0); // State to manage zoom level
+  const [scale, setScale] = useState(1.0);
   const { token } = useAuth();
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const PDFViewerPage = () => {
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
-    setPageNumber(1); // Reset to first page on new document load
+    setPageNumber(1);
   };
 
   const goToPreviousPage = () => {
@@ -47,11 +47,11 @@ const PDFViewerPage = () => {
   };
 
   const zoomIn = () => {
-    setScale((prevScale) => prevScale + 0.2); // Increase scale by 0.2
+    setScale((prevScale) => prevScale + 0.2);
   };
 
   const zoomOut = () => {
-    setScale((prevScale) => Math.max(prevScale - 0.2, 0.2)); // Decrease scale by 0.2, minimum 0.2
+    setScale((prevScale) => Math.max(prevScale - 0.2, 0.2));
   };
 
   return (

@@ -7,13 +7,13 @@ import "../../styles/auth.css";
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // State to store error message
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { setToken } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear previous errors
+    setError(""); //
     try {
       const response = await API.post("/auth/signup", {
         username,
@@ -23,10 +23,8 @@ const Signup = () => {
       navigate("/");
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        // Capture the error message from the response
         setError(error.response.data.message);
       } else {
-        // Log unexpected errors to console
         console.error("Unexpected error:", error);
       }
     }
